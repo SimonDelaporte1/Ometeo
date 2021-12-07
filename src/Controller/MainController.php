@@ -2,9 +2,11 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use WeatherModel;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class MainController extends AbstractController
 {
@@ -24,7 +26,7 @@ class MainController extends AbstractController
      */
     public function mountain(): Response
     {
-        return $this->render('main/index.html.twig', [
+        return $this->render('main/mountain.html.twig', [
             'controller_name' => 'MainController',
         ]);
     }
@@ -34,7 +36,7 @@ class MainController extends AbstractController
      */
     public function beach(): Response
     {
-        return $this->render('main/index.html.twig', [
+        return $this->render('main/beach.html.twig', [
             'controller_name' => 'MainController',
         ]);
     }
@@ -42,11 +44,22 @@ class MainController extends AbstractController
     /**
      * @Route("/set_city", name="main_set_city", requirements={"id"="\d+"})
      */
-    public function set_city(int $id): Response
+    public function set_city(SessionInterface $session, int $id): Response
     {
-        return $this->render('main/index.html.twig', [
-            'controller_name' => 'MainController',
-        ]);
+                
+        // on récupère le theme de la session
+        $city = $session->set('city', $id);
+
+        // on redirige vers la home
+        return $this->redirectToRoute('main_home');
     }
-    
+
+    public function get_city(SessionInterface $session): array
+    {
+        // on récupère le theme de la session
+        $city_id = $session->get('city');
+        $city_array = WeatherModel::getWeatherByCityIndex($city_id);
+        // on redirige vers la home
+        return $city_array;
+    }
 }
