@@ -10,15 +10,12 @@
     <div class="col-9">
 
         <h1 class="mb-5">Bienvenue sur la météo des villes !</h1>
-
-        <div class="item item--bg-snow">
-            <div class="item--city"><a href="#">Annecy</a></div>
-            <div class="item--forecast">29-01 : -4°C / 2°C</div>
+        {% for key,this_city in cities_list %}
+        <div class="item item--bg-{{ this_city.weather }}">
+            <div class="item--city"><a href="{{ path('main_set_city', {id: key}) }}">{{ this_city.city }}</a></div>
+            <div class="item--forecast">{{ this_city.date }} : {{ this_city.min }}°C / {{ this_city.max }}°C</div>
         </div>
-        <div class="item item--bg-rain">
-            <div class="item--city"><a href="#">Biarritz</a></div>
-            <div class="item--forecast">29-01 : -5°C / 0°C</div>
-        </div>
+        {% endfor %}
     </div>
 
 {% endblock %}
