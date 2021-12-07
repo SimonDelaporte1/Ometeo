@@ -11,6 +11,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class MainController extends AbstractController
 {
     /**
+     * Affiche la page d'accueil
+     * 
+     * @return Response
+     * 
      * @Route("/", name="main_home")
      */
     public function home(): Response
@@ -22,6 +26,11 @@ class MainController extends AbstractController
 
 
     /**
+     * 
+     * Affiche la page météo des montagnes
+     * 
+     * @return Response
+     * 
      * @Route("/mountain", name="main_mountain")
      */
     public function mountain(): Response
@@ -32,6 +41,11 @@ class MainController extends AbstractController
     }
 
     /**
+     * 
+     * Affiche la page météo des plages
+     * 
+     * @return Response
+     * 
      * @Route("/beach", name="main_beach")
      */
     public function beach(): Response
@@ -42,11 +56,18 @@ class MainController extends AbstractController
     }
 
     /**
+     * 
+     * enregistre une ville en session
+     * 
+     * @param SessionInterface $session
+     * @param int $id
+     * 
+     * @return Response
+     * 
      * @Route("/set_city", name="main_set_city", requirements={"id"="\d+"})
      */
     public function set_city(SessionInterface $session, int $id): Response
     {
-                
         // on récupère le theme de la session
         $city = $session->set('city', $id);
 
@@ -54,6 +75,12 @@ class MainController extends AbstractController
         return $this->redirectToRoute('main_home');
     }
 
+    /**
+     * retourne les informations d'une ville donnée
+     *
+     * @param SessionInterface $session
+     * @return array
+     */
     public function get_city(SessionInterface $session): array
     {
         // on récupère le theme de la session
