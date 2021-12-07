@@ -1,19 +1,66 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
-        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
-        {% block stylesheets %}
-            {{ encore_entry_link_tags('app') }}
-        {% endblock %}
 
-        {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
-        {% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-    </body>
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome!</title>
+
+    <!-- Balises pour le responsive -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+
+    <!-- Notre CSS custom -->
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+</head>
+
+<body class="mb-5">
+    <nav class="container py-3 mb-3">
+        <ul class="nav nav-pills">
+            <li class="nav-item">
+                <a class="nav-link {% block home_active %}{% endblock %}" href="{{ path('main_home') }}">Accueil</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {% block mountain_active %}{% endblock %}" href="{{ path('main_mountain') }}">Montagne</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {% block beach_active %}{% endblock %}" href="{{ path('main_beach') }}">Plages</a>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Minimal responsive + columns -->
+    <main class="container">
+        <div class="row">
+            <!-- Content (les pages) -->
+            <div class="col-9">
+                {% block content %}{% endblock %}
+            </div>
+
+            <!-- Sidebar (le widget) -->
+            <div class="col-3">
+
+                <!-- Code du widget -->
+                <div id="widget">
+
+                    <!-- Si ville sélectionnée -->
+                    <p><b>Bordeaux</b></p>
+                    <p>29-01-2020</p>
+                    <p><img src="images/sun-cloud.png"></p>
+                    <p>0°C / 10°C</p>
+
+                    <!-- Si ville non sélectionnée -->
+                    <div>Sélectionnez une ville<br>dans la liste de gauche</div>
+
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+</body>
+
 </html>
