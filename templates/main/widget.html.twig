@@ -1,7 +1,7 @@
 <!-- Si ville sélectionnée -->
 <p><b>{{ widget.city }}</b></p>
 <p>{{ widget.date }}</p>
-<p><img src="{{ asset('images/{{ widget.weather }}')  }} .png "></p>
+<p><img src="{{ asset('images/' ~ widget.weather ~ '')  }}.png "></p>
 <p>{{ widget.min }}°C / {{ widget.max }}</p>
 
 <!-- Si ville non sélectionnée -->
