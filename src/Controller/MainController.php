@@ -77,7 +77,7 @@ class MainController extends AbstractController
     {
         // on récupère le theme de la session
         $session = $this->requestStack->getSession();
-        $city_id = $session->get('city');
+        $city_id = $session->get('city', 0);
         $city_array = WeatherModel::getWeatherByCityIndex($city_id);
         return $city_array;
     }
@@ -93,8 +93,9 @@ class MainController extends AbstractController
      * 
      * @Route("/set_city/{id}", name="main_set_city", requirements={"id"="\d+"})
      */
-    public function set_city(SessionInterface $session, int $id): Response
+    public function set_city(int $id): Response
     {
+        $session = $this->requestStack->getSession();
         // on récupère le theme de la session
         $city = $session->set('city', $id);
 

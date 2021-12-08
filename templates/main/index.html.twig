@@ -13,7 +13,7 @@
         {% for key,this_city in cities_list %}
         <div class="item item--bg-{{ this_city.weather }}">
             <div class="item--city"><a href="{{ path('main_set_city', {id: key}) }}">{{ this_city.city }}</a></div>
-            <div class="item--forecast">{{ this_city.date }} : {{ this_city.min }}°C / {{ this_city.max }}°C</div>
+            <div class="item--forecast">{{ this_city.date|date("d/m") }} : {{ this_city.min }}°C / {{ this_city.max }}°C</div>
         </div>
         {% endfor %}
     </div>
