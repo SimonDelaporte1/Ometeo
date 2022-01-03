@@ -9,7 +9,7 @@
     <!-- Content (les pages) -->
     <div class="col-9">
 
-        <h1 class="mb-5">Bienvenue sur la météo des villes !</h1>
+        <h1 class="mb-5">Bienvenue sur la météo des villes ! Je test les Branches GIT.</h1>
         {% for key,this_city in cities_list %}
         <div class="item item--bg-{{ this_city.weather }}">
             <div class="item--city"><a href="{{ path('main_set_city', {id: key}) }}">{{ this_city.city }}</a></div>
